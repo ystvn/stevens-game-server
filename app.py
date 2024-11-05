@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-cred = credentials.Certificate(r'./etc/secrets/cred.json')
+cred = credentials.Certificate('/etc/secrets/cred.json')
 firebase_admin.initialize_app(cred)
 
 # # Auburn Kebabs
