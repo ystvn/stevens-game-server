@@ -6,17 +6,13 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Render's default path for secret files
 cred_path = '/etc/secrets/firebase-credentials.json'
 
 cred = credentials.Certificate(cred_path)
-firebase_admin.initialize_app(cred, {
-    # Make sure to use the correct database URL format
-    'databaseURL': "https://stevens-games.firebaseio.com"
-})
+firebase_admin.initialize_app(cred)
 
 # # Auburn Kebabs
 
