@@ -13,7 +13,7 @@ CORS(app)
 cred_path = '/etc/secrets/firebase-credentials.json'
 
 cred = credentials.Certificate(cred_path)
-initialize_app(cred, {
+firebase_admin.initialize_app(cred, {
     # Make sure to use the correct database URL format
     'databaseURL': "https://stevens-games.firebaseio.com"
 })
