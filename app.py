@@ -8,10 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Render's default path for secret files
-cred_path = '/etc/secrets/firebase-credentials.json'
-
-cred = credentials.Certificate(cred_path)
+cred = credentials.Certificate(r'./etc/secrets/cred.json')
 firebase_admin.initialize_app(cred)
 
 # # Auburn Kebabs
