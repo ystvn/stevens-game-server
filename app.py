@@ -9,10 +9,13 @@ app = Flask(__name__)
 CORS(app)
 
 
-cred = credentials.Certificate(
-    "/Users/stevenyu/stevens-games/database/stevens-games-firebase-adminsdk-4iusp-c503c4ac3b.json")
-firebase_admin.initialize_app(cred, {
-    'databaseURL': "stevens-games.firebaseapp.com"
+# Render's default path for secret files
+cred_path = '/etc/secrets/firebase-credentials.json'
+
+cred = credentials.Certificate(cred_path)
+initialize_app(cred, {
+    # Make sure to use the correct database URL format
+    'databaseURL': "https://stevens-games.firebaseio.com"
 })
 
 # # Auburn Kebabs
