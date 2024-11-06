@@ -3,11 +3,12 @@ import firebase_admin
 from firebase_admin import credentials, firestore, db
 from flask import Flask, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-cred = credentials.Certificate('/etc/secrets/FIREBASE_CREDS.json')
+cred = credentials.Certificate('./FIREBASE_CREDS.json')
 firebase_admin.initialize_app(cred)
 
 # # Auburn Kebabs
@@ -152,7 +153,7 @@ def getTeamGames(team):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
 
 # def add_game(team1_name, team2_name, game_date, youtube_link):
 #     db = firestore.client()
