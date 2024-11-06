@@ -32,6 +32,7 @@ firebase_admin.initialize_app(cred)
 
 @app.route("/ak", methods=["GET"])
 def auburnkebabs():
+    print("hi")
     return getTeamGames("AUBURN KEBABS")
 
 
