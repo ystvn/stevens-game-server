@@ -2,13 +2,29 @@ from datetime import datetime
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 import psycopg
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-cred = credentials.Certificate("/etc/secrets/creds.json")
+# Construct the credentials dictionary from environment variables
+firebase_creds = {
+    "type": os.getenv("FIREBASE_TYPE"),
+    "project_id": os.getenv("FIREBASE_PROJECT_ID"),
+    "private_key_id": os.getenv("FIREBASE_PRIVATE_KEY_ID"),
+    "private_key": os.getenv("FIREBASE_PRIVATE_KEY"),
+    "client_email": os.getenv("FIREBASE_CLIENT_EMAIL"),
+    "client_id": os.getenv("FIREBASE_CLIENT_ID"),
+    "auth_uri": os.getenv("FIREBASE_AUTH_URI"),
+    "token_uri": os.getenv("FIREBASE_TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"),
+    "client_x509_cert_url": os.getenv("FIREBASE_CLIENT_X509_CERT_URL"),
+    "universe-domain": os.getenv("FIREBASE_UNIVERSE_DOMAIN")
+}
+
+cred = credentials.Certificate(firebase_creds)
 firebase_admin.initialize_app(cred)
 
 # # Auburn Kebabs
