@@ -1,15 +1,11 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 from flask import Flask, jsonify
-from flask_caching import Cache
 from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
-cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
-cache.init_app(app)
-
 cred = credentials.Certificate(
     "./creds.json")
 firebase_admin.initialize_app(cred, {
@@ -19,27 +15,23 @@ firebase_admin.initialize_app(cred, {
 
 
 @app.route("/ak", methods=["GET"])
-@cache.cached(timeout=600)
 def auburnkebabs():
     return getTeamGames("AUBURN KEBABS")
 # NewJeans Elite
 
 
-@app.route("/nje", methods=["GET"])
-@cache.cached(timeout=600)
+@app.route("/nje")
 def newjeanselite():
     return getTeamGames("NEWJEANS ELITE")
 # LeTeam
 
 
-@app.route("/lt", methods=["GET"])
-@cache.cached(timeout=600)
+@app.route("/lt")
 def leteam():
     return getTeamGames("LETEAM")
 
 
 @app.route("/game/<game_id>", methods=["GET"])
-@cache.cached(timeout=600)
 def get_game(game_id):
     try:
         db = firestore.client()
@@ -73,7 +65,6 @@ def get_game(game_id):
 
 
 @app.route("/", methods=["GET"])
-@cache.cached(timeout=600)
 def allGames():
     try:
         db = firestore.client()
