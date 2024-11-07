@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "stevens-games",
+    "private_key_id": "5392f7eb682aca2028bc7880f18b4789679992a0",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCiIZUDeZ1javwn\nXAQX3X2rPBLcf13/3IGvqfcUq+Gk+24+BnIc5Atf+j7LG1sdxj/Y9spU/P6LoXtD\nuU0025mPlcwgG1i0Rxjo0XzDXPUGkkO7d2UZmv8AGq9JxozEpRpT7S3Hm/6xL+Dn\nD2hYDQHqZFCkUhyTlRCoktLE3LgsYTeBxsw9kktSP+vdKkhe01awolpiML0FzFns\npYSTqtRbWHQAakXitp4vokmITEUZIXm2mhrE2d+uR95UK9K/QhxGaUTfa9UNmODo\nEcNj1Xen/Ca9DoTibfy48eTHM4XFR/JSGRj3mWzmB/sxugDODVbyGIZrkV8i8yoJ\nwKzGk4xBAgMBAAECggEAAxHxuWwfH9fRyIkEhtMp4wkzLju3MvYg+ouUYy7SCga8\n0q3akVN8J6gcckolUo4DfX9G248i3tAC/ohOvvZ9lOt4Pw9lgZxrC1WUMDrdZO92\nGuGq52447+6RbSs2VS7vLbGrEUGR9Bb9AkMXbbtpUt/tav8nDWBgPWDyXsnzLtvs\nsuTz5mmcwv4e4833WmgXptJMESaWPHnX7Jup3uNlqQ6bB2dxGJsxDk3vckOh9Glb\n79ci8mn2OtLlIvI7SVwdnJXcYLGZ8ZXG3kmz1c3ZNF9bpbPE1bQG04ehfS15vCey\nIt1PPULOgUeNS1WOQoZ4XySlpIDwTILUWjZpBRq5MQKBgQDNDbiar9BTWjEFpbfg\n5eySQc16fp3kUuLDoT6bOY5O+DwvwcMkyEFWtbcruRCFH18hOBHqa6q9Ae35OoJK\nnlOS38jRnpnG0pUx1H3NeBoA+7cdj3grYMMyZH5Pg1CdaNC0/npnXkhN6B/vVPNc\nCzDzpmS1xWlY+BI/3jEoqLxLnQKBgQDKadAk5R3vl79MIw3pJhbR2/eNse4mqWgp\n5tHf9JBXFeelZzGmWo2wySI++vMXo0LKHcThbxG1zIGCh1R+hHwN5c6qbFndtwyq\nuyuODgp4EkPLR7MeaVqkdwNcKebYWN68E5RbqqKm6oD928aFY5zfjydhBIPcnIPo\ngt5E4xo79QKBgQCNu4U1Dn8NjhLCV4hgoCxD783KdIhIUG5DUEnI2yCdPwHC9Mgg\nvXZEK/g+9X0Qtt13RZ1EjkUGvbWyhhmW4BbeN2ZEVb7u6ZGMTtbh1bkLovEwMoGa\nYhip1UJlTVvEYbWY1SjgGBAcIW0pbWuE3ItqbkHAToKBp35dvQP3maIFFQKBgAGM\n6fE+aApLyUVWB2c/yXD2FGFbeY2GQqv/fqAOiYSBQHL95V122BsAj2iYF4CY2Ywe\nykFHzoTr+hn722PUs/aPShP4HIAcRNaR9HV0GhRtX2OROwgCmpUj7DyqfYAuvhYG\nuF4zYmeQ6EgJhO3Eo5D60bxmgnQQJtqDFhzE+JB5AoGBAK60RuHoSW4Bt3RaEBEx\na1x6hGmvEVcYZQrNvgA5QpAIyK0C+DB3pqOEbfrjpRhj0GWbp0IpcIWyHKegsBFz\niGvpAq0DzXRGzYgL9Kzx7cCnksWLS21A6zxji1flJKxp9lexPc/FHJ18cUBjSNwn\nP4g5JERI8SoMMLacavNq2WGG\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-4iusp@stevens-games.iam.gserviceaccount.com",
+    "client_id": "114454033861757940541",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-4iusp%40stevens-games.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
