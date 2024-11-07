@@ -2,11 +2,11 @@ from datetime import datetime
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 from flask import Flask, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "*"}})
 
 cred = credentials.Certificate('./FIREBASE_CREDS.json')
 firebase_admin.initialize_app(cred)
