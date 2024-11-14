@@ -71,7 +71,7 @@ def allGames():
 
         # Fetch all games in one query
         games_query = db.collection("games").order_by(
-            "g_date", direction=firestore.Query.DESCENDING).stream()
+            "g_date", direction=firestore.firestore.Query.DESCENDING).stream()
 
         # Prepare a dictionary to batch fetch all team documents needed
         team_ids = set()
@@ -85,8 +85,8 @@ def allGames():
             team_ids.update([game_data["t1_id"], game_data["t2_id"]])
 
         # Batch fetch all team documents
-        team_docs = db.get_all(
-            [db.collection("teams").document(team_id) for team_id in team_ids])
+        team_docs = db.get_all([db.collection("teams").document(
+            team_id) for team_id in team_ids])  # type: ignore
         team_map = {team_doc.id: team_doc.to_dict()
                     for team_doc in team_docs if team_doc.exists}
 
@@ -125,7 +125,7 @@ def getTeamGames(team):
 
         # Step 2: Fetch all games where this team is the first team in a single query
         games_query = db.collection("games").where("t1_id", "==", team_id).order_by(
-            "g_date", direction=firestore.Query.DESCENDING).stream()
+            "g_date", direction=firestore.firestore.Query.DESCENDING).stream()
 
         # Step 3: Gather all unique `t2_id`s to batch-fetch team2 documents in one request
         game_data_list = []
