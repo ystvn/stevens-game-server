@@ -69,13 +69,13 @@ def get_all_teams():
         db = firestore.client()
         # Fetch all games in one query
         teams_query = db.collection("teams").order_by(
-            "name", direction=firestore.firestore.Query.DESCENDING).stream()
+            "name", direction=firestore.firestore.Query.ASCENDING).stream()
 
-        teams = {}
+        teams = []
 
         for team in teams_query:
             team_data = team.to_dict()
-            teams[team_data["name"]] = team.id
+            teams.append(team_data["name"])
 
         return jsonify({"games": teams})
     except Exception as e:
