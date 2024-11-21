@@ -207,8 +207,6 @@ def add_game():
                 new_team_ref = db.collection("teams").add({"name": team_name})
                 # Get the document ID of the newly created team
                 team_id = new_team_ref[1].id
-                print(f"Added new team to Firestore: {
-                      team_name} (ID: {team_id})")
 
             return team_id
 
