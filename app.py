@@ -61,6 +61,26 @@ def get_game(game_id):
         return jsonify({"game": response_data})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/getteams", methods=["GET"])
+def get_all_teams():
+    try:
+        db = firestore.client()
+        # Fetch all games in one query
+        teams_query = db.collection("teams").order_by(
+            "name", direction=firestore.firestore.Query.DESCENDING).stream()
+
+        teams = {}
+
+        for team in teams_query:
+            team_data = team.to_dict()
+            teams[team_data["name"]] = team.id
+
+        return jsonify({"games": teams})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 # # Homepage all games
 
 
@@ -161,45 +181,3 @@ def getTeamGames(team):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-def add_game(team1_name, team2_name, game_date, youtube_link):
-    db = firestore.client()
-
-    team1_name = team1_name.upper()
-    team2_name = team2_name.upper()
-
-    def get_or_create_team_id(team_name):
-        team_ref = db.collection("teams").where(
-            "name", "==", team_name).limit(1).stream()
-        team_id = None
-        for team in team_ref:
-            team_id = team.id  # If the team exists, get its document ID
-
-        if team_id is None:
-            # If team doesn't exist, add it to the teams collection
-            new_team_ref = db.collection("teams").add({"name": team_name})
-            # Get the document ID of the newly created team
-            team_id = new_team_ref[1].id
-            print(f"Added new team to Firestore: {team_name} (ID: {team_id})")
-
-        return team_id
-
-    # Fetch or create team IDs for team1 and team2
-    team1_id = get_or_create_team_id(team1_name)
-    team2_id = get_or_create_team_id(team2_name)
-
-    # Parse the date from dd/mm/yyyy to a Firestore-compatible datetime object
-    game_datetime = datetime.strptime(game_date, "%d/%m/%Y")
-
-    # Prepare game data to push to "games" collection
-    game_data = {
-        "t1_id": team1_id,
-        "t2_id": team2_id,
-        "g_date": game_datetime,
-        "youtube_link": youtube_link
-    }
-
-    # Add the new game to the "games" collection
-    db.collection("games").add(game_data)
-    print("Game successfully added to Firestore.")
