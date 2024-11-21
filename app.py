@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, db
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime
 
@@ -175,6 +175,62 @@ def getTeamGames(team):
             })
 
         return jsonify({"games": games_list})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Function to add games
+
+
+@app.route("/addgame", methods=["POST"])
+def add_game():
+    # Extract data from the JSON request body
+    data = request.get_json()
+    team1_name = data.get("team1_name")
+    team2_name = data.get("team2_name")
+    game_date = data.get("game_date")
+    youtube_link = data.get("youtube_link")
+    try:
+        db = firestore.client()
+
+        team1_name = team1_name.upper()
+        team2_name = team2_name.upper()
+
+        def get_or_create_team_id(team_name):
+            team_ref = db.collection("teams").where(
+                "name", "==", team_name).limit(1).stream()
+            team_id = None
+            for team in team_ref:
+                team_id = team.id  # If the team exists, get its document ID
+
+            if team_id is None:
+                # If team doesn't exist, add it to the teams collection
+                new_team_ref = db.collection("teams").add({"name": team_name})
+                # Get the document ID of the newly created team
+                team_id = new_team_ref[1].id
+                print(f"Added new team to Firestore: {
+                      team_name} (ID: {team_id})")
+
+            return team_id
+
+        # Fetch or create team IDs for team1 and team2
+        team1_id = get_or_create_team_id(team1_name)
+        team2_id = get_or_create_team_id(team2_name)
+
+        # Parse the date from dd/mm/yyyy to a Firestore-compatible datetime object
+        game_datetime = datetime.strptime(game_date, "%d/%m/%Y")
+
+        youtube_link = youtube_link.replace("watch?v=", "embed/")
+
+        # Prepare game data to push to "games" collection
+        game_data = {
+            "t1_id": team1_id,
+            "t2_id": team2_id,
+            "g_date": game_datetime,
+            "youtube_link": youtube_link
+        }
+
+        # Add the new game to the "games" collection
+        db.collection("games").add(game_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
