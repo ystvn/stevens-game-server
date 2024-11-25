@@ -216,7 +216,7 @@ def add_game():
         team2_id = get_or_create_team_id(team2_name)
 
         # Parse the date from dd/mm/yyyy to a Firestore-compatible datetime object
-        game_datetime = datetime.strptime(game_date, "%Y/%m/%d")
+        game_datetime = datetime.strptime(game_date, "%Y-%m-%d")
 
         youtube_link = youtube_link.replace("watch?v=", "embed/")
 
