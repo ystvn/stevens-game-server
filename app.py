@@ -185,6 +185,7 @@ def getTeamGames(team):
 def add_game():
     # Extract data from the JSON request body
     data = request.get_json()
+
     team1_name = data.get("team1_name")
     team2_name = data.get("team2_name")
     game_date = data.get("game_date")
@@ -215,7 +216,7 @@ def add_game():
         team2_id = get_or_create_team_id(team2_name)
 
         # Parse the date from dd/mm/yyyy to a Firestore-compatible datetime object
-        game_datetime = datetime.strptime(game_date, "%d/%m/%Y")
+        game_datetime = datetime.strptime(game_date, "%Y/%m/%d")
 
         youtube_link = youtube_link.replace("watch?v=", "embed/")
 
