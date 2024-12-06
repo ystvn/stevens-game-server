@@ -1,16 +1,21 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, db
+from dotenv import load_dotenv
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
+
 cred = credentials.Certificate(
     "./creds.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': "stevens-games.firebaseapp.com"
 })
+load_dotenv()
+rightPassword = os.getenv('PASSWORD')
 # # Auburn Kebabs
 
 
@@ -29,6 +34,11 @@ def newjeanselite():
 @app.route("/lt")
 def leteam():
     return getTeamGames("LETEAM")
+
+
+@app.route("/checkpassword/<password>", methods=["GET"])
+def checkPassword(password):
+    return password == rightPassword
 
 
 @app.route("/game/<game_id>", methods=["GET"])
@@ -230,6 +240,7 @@ def add_game():
 
         # Add the new game to the "games" collection
         db.collection("games").add(game_data)
+        return jsonify({"Game added!"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
