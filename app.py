@@ -14,7 +14,8 @@ cred = credentials.Certificate(
 firebase_admin.initialize_app(cred, {
     'databaseURL': "stevens-games.firebaseapp.com"
 })
-load_dotenv()
+
+load_dotenv("./password.env")
 rightPassword = os.getenv('PASSWORD')
 # # Auburn Kebabs
 
@@ -36,9 +37,10 @@ def leteam():
     return getTeamGames("LETEAM")
 
 
-@app.route("/checkpassword/<password>", methods=["GET"])
-def checkPassword(password):
-    return password == rightPassword
+@app.route("/checkpassword/", methods=["GET"])
+def checkPassword():
+    password = request.args.get('password')
+    return str(password == rightPassword)
 
 
 @app.route("/game/<game_id>", methods=["GET"])
