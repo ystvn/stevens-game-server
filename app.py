@@ -43,10 +43,8 @@ def checkPassword():
     return str(password == rightPassword)
 
 
-@app.route("/game/", methods=["GET"])
-def get_game():
-    game_id = request.args.get('game_id')
-
+@app.route("/game/<game_id>", methods=["GET"])
+def get_game(game_id):
     try:
         db = firestore.client()
         # Fetch the game document from the "games" collection by its ID
