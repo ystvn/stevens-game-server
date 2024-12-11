@@ -40,7 +40,7 @@ def leteam():
 @app.route("/checkpassword/", methods=["GET"])
 def checkPassword():
     password = request.args.get('password')
-    return str(password == rightPassword)
+    return jsonify({"correctPassword": (password == rightPassword)})
 
 
 @app.route("/game/<game_id>", methods=["GET"])
