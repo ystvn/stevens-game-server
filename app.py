@@ -125,8 +125,7 @@ def allGames():
         # Process each game with the fetched team names
         games_list = []
         for game_data in games_data:
-            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{
-                game_data["t1_score"]} - {game_data["t2_score"]}'
+            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{game_data["t1_score"]} - {game_data["t2_score"]}'
             team1_name = team_map.get(game_data["t1_id"], {}).get(
                 "name", "Unknown Team 1")
             team2_name = team_map.get(game_data["t2_id"], {}).get(
