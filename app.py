@@ -125,6 +125,8 @@ def allGames():
         # Process each game with the fetched team names
         games_list = []
         for game_data in games_data:
+            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{
+                game_data["t1_score"]} - {game_data["t2_score"]}'
             team1_name = team_map.get(game_data["t1_id"], {}).get(
                 "name", "Unknown Team 1")
             team2_name = team_map.get(game_data["t2_id"], {}).get(
@@ -134,7 +136,8 @@ def allGames():
                 "team1": team1_name,
                 "team2": team2_name,
                 "date": game_data["g_date"],
-                "youtube_link": game_data["youtube_link"]
+                "youtube_link": game_data["youtube_link"],
+                "score": score
             })
 
         return jsonify({"games": games_list})
@@ -178,12 +181,16 @@ def getTeamGames(team):
         # Step 5: Build the response with team names
         games_list = []
         for game_data in game_data_list:
+            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{
+                game_data["t1_score"]} - {game_data["t2_score"]}'
+
             games_list.append({
                 "game_id": game_data["game_id"],
                 "team1": team,
                 "team2": team2_map.get(game_data["t2_id"], "Unknown Team 2"),
                 "date": game_data["g_date"],
-                "youtube_link": game_data["youtube_link"]
+                "youtube_link": game_data["youtube_link"],
+                "score": score
             })
 
         return jsonify({"games": games_list})
@@ -202,6 +209,9 @@ def add_game():
     team2_name = data.get("team2_name")
     game_date = data.get("game_date")
     youtube_link = data.get("youtube_link")
+    team1_score = data.get("team1_score")
+    team2_score = data.get("team2_score")
+
     try:
         db = firestore.client()
 
@@ -237,7 +247,9 @@ def add_game():
             "t1_id": team1_id,
             "t2_id": team2_id,
             "g_date": game_datetime,
-            "youtube_link": youtube_link
+            "youtube_link": youtube_link,
+            "t1_score": team1_score,
+            "t2_score": team2_score,
         }
 
         # Add the new game to the "games" collection
