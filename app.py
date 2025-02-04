@@ -180,8 +180,7 @@ def getTeamGames(team):
         # Step 5: Build the response with team names
         games_list = []
         for game_data in game_data_list:
-            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{
-                game_data["t1_score"]} - {game_data["t2_score"]}'
+            score = "N/A" if game_data["t1_score"] == "0" and game_data["t2_score"] == "0" else f'{game_data["t1_score"]} - {game_data["t2_score"]}'
 
             games_list.append({
                 "game_id": game_data["game_id"],
